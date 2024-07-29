@@ -37,8 +37,8 @@ let array_answers = {
     "15" : '',
     "16" : '',
 }
+
 let correctly_answers_yes = [2,5,7,11,15];
-let correctly_answers_no = [1,3,4,6,8,9,10,12,13,14,16];
 
 for(let i = 0; i < radio_buttons.length; i++){
     radio_buttons[i].addEventListener('click', processing_answer, false);
@@ -52,6 +52,10 @@ function processing_answer(){
 
     array_answers[number] = radio_button.value;
 
+    if(radio_button.getAttribute('data-id') == '1' && radio_button.value == 'yes'){
+        correctly_answers_yes = [1,2,3,4,9,10,11,12]
+    }
+    console.log(correctly_answers_yes)
     if(radio_button.getAttribute('data-id') == '16'){
         check_answers();
         return;
@@ -65,6 +69,7 @@ function processing_answer(){
     
     main_text.innerHTML = next_number + '. ' + array_text[next_number];
 
+
 }
 function check_answers(){
 
@@ -74,6 +79,9 @@ function check_answers(){
 
         let correctly = correctly_answers_yes[i];
 
+        console
+
+
         if(array_answers[correctly] != 'yes'){
             flag = 0;
             break;
@@ -82,24 +90,24 @@ function check_answers(){
     }
 
     
-    for(let i = 0; i < correctly_answers_no.length; i++){
 
-        let correctly = correctly_answers_no[i];
-
-        if(array_answers[correctly] != 'no'){
-            flag = 0;
-            break;
-        }
-
-    }
 
 
     if(flag == 1){
-        main_text.innerText = 'Ваше психологическое здоровье в полном порядке. Вы спокойны и всегда стараетесь оценивать ситуацию разумно. Прежде чем принять решение, вы взвесите факты, найдете недостающие звенья и устраните проблему. А также вы умеете защитить себя и отличить свои цели от навязанных. Вы можете смело доверять себе, и тогда у вас все получится!';
+        if(correctly_answers_yes.length == 8){
+            main_text.innerText = 'В данный момент, вы скорее всего, переживаете трудные времена. У вас преобладают тревожные мысли. Помимо этого, вы испытываете усталость и сомнения в принятии решений.';
+        }else{
+            main_text.innerText = 'Ваше психологическое здоровье в полном порядке. Вы спокойны и всегда стараетесь оценивать ситуацию разумно. Прежде чем принять решение, вы взвесите факты, найдете недостающие звенья и устраните проблему. А также вы умеете защитить себя и отличить свои цели от навязанных. Вы можете смело доверять себе, и тогда у вас все получится!';
+        }
+        radio_buttons[0].parentElement.style.display = 'none';
+        radio_buttons[1].parentElement.style.display = 'none';
         return;
     }
 
+    radio_buttons[0].parentElement.style.display = 'none';
+    radio_buttons[1].parentElement.style.display = 'none';
+
     title.style.display = 'none';
-    main_text.innerHTML = 'Рекомендуем вам обратиться в эти учреждения :ГБУЗ ПК «Краевая клиническая психиатрическая больница» Больничный городок:614037, г. Пермь, ул. Корсуньская 2-я, д.10; Приемное отделение:' + "<a href='tel: 8 (342) 263-95-84'> 8 (342) 263-95-84</a>";
+    main_text.innerHTML = 'Рекомендуем вам обратиться в эти учреждения :ГБУЗ ПК «Краевая клиническая психиатрическая больница» Больничный городок:614037, г. Пермь, ул. Корсуньская 2-я, д.10; Приемное отделение:' + "<a href='tel: 8 (342) 263-95-84' style='font-weight: 700; text-decoration: underline; color:blue; display: block' > 8 (342) 263-95-84</a>";
 
 }
